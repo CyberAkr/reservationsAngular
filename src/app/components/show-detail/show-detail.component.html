@@ -1,0 +1,31 @@
+<div class="container">
+    <div *ngIf="loading">Chargement...</div>
+    
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    
+    <div *ngIf="show && !loading && !error">
+      <h2>{{ show.title }}</h2>
+      
+      <div class="row">
+        <div class="col-md-4">
+            <img *ngIf="show.posterUrl" 
+            [src]="'http://localhost:8080/images/' + show.posterUrl" 
+            class="img-fluid" 
+            [alt]="show.title || 'Show image'">
+        </div>
+        <div class="col-md-8">
+          <p *ngIf="show.description"><strong>Description:</strong> {{ show.description }}</p>
+          <p *ngIf="show.price"><strong>Prix:</strong> {{ show.price }} €</p>
+          <p><strong>Réservable:</strong> {{ show.bookable ? 'Oui' : 'Non' }}</p>
+          
+          <div *ngIf="show.location">
+            <h3>Lieu</h3>
+            <p *ngIf="show.location.name">{{ show.location.name }}</p>
+            <p *ngIf="show.location.address">{{ show.location.address }}</p>
+          </div>
+          
+          <a routerLink="/shows" class="btn btn-secondary mt-3">Retour à la liste</a>
+        </div>
+      </div>
+    </div>
+</div>

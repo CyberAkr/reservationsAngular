@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Liste des spectacles</h2>
+    
+    <div *ngIf="loading">
+        <p>Chargement des spectacles...</p>
+    </div>
+    
+    <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+    </div>
+    
+    <div *ngIf="!loading && shows.length === 0">
+        Aucun spectacle disponible.
+    </div>
+    
+    <div *ngIf="!loading && shows.length > 0" class="row">
+        <div *ngFor="let show of shows" class="col-md-4 mb-3">
+            <div class="card">
+               <img *ngIf="show.posterUrl" 
+     [src]="'http://localhost:8080/images/' + show.posterUrl" 
+     class="card-img-top" 
+     [alt]="show.title">
+                <div class="card-body">
+                    <h5 class="card-title">{{ show.title }}</h5>
+                    <p class="card-text">{{ show.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span *ngIf="show.price">
+                            Prix : {{ show.price }} €
+                        </span>
+                        <a [routerLink]="['/shows', show.id]" class="btn btn-primary">
+                            Voir détails
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
