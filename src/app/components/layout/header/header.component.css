@@ -1,0 +1,25 @@
+/* src/app/components/header/header.component.css */
+.user-greeting {
+    margin-right: 15px;
+    font-weight: 500;
+  }
+  
+  .auth-buttons a {
+    margin-left: 10px;
+  }
+  
+  header {
+    margin-bottom: 20px;
+  }
+  
+  .user-menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Pour Bootstrap 4, assurez-vous que le menu déroulant fonctionne */
+  @media (min-width: 768px) {
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  }
