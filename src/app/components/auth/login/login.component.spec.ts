@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// src/app/components/auth/login/login.component.ts (méthode onSubmit)
+onSubmit() {
+  this.submitted = true;
 
-import { LoginComponent } from './login.component';
+  if (this.loginForm.invalid) {
+    return;
+  }
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [LoginComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  this.authService.login({
+    login: this.f['login'].value,
+    password: this.f['password'].value
+  }).subscribe({
+    next: (response) => {
+      // Rediriger vers la page d'accueil ou une page protégée
+      this.router.navigate(['/']); // ou '/shows' si c'est votre page principale
+    },
+    error: (err) => {
+      this.error = err.error?.message || 'Erreur de connexion';
+    }
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+}
